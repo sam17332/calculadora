@@ -10,23 +10,21 @@
  */
 public class Calculadora implements CalculadoraI {
     public String calcular(String esp){
-        String resultado = "";
+        String respuesta = "";
         StackVector<String> pila = new StackVector<String>();
         
         for(int i=0; i<=esp.length(); i++){
             String agregar = esp.substring(0, esp.length());
             
+            
+            String numero1 = "";
+            String numero2 = "";
+            
             /* este if solo va a dejar que puedan agregarse a la pila los
             numeros del 0 al 9 y los signos de suma, resta, multiplicacion y 
             division
             */
-            String numero1 = "";
-            String numero2 = "";
-            
-            /*
-            ||agregar.equals("+")||agregar.equals("-")
-                    ||agregar.equals("*")||agregar.equals("/")
-            */
+
             if(agregar.equals("0")||agregar.equals("1")||agregar.equals("2")||
                agregar.equals("3")||agregar.equals("4")||agregar.equals("5")
                ||agregar.equals("6")||agregar.equals("7")||agregar.equals("8")
@@ -47,30 +45,33 @@ public class Calculadora implements CalculadoraI {
             
             if(agregar.equals("+")){
                 double suma = Double.parseDouble(numero1) + Double.parseDouble(numero2);
-                resultado = String.valueOf(suma);
+                String resultado = String.valueOf(suma);
                 numero1 = String.valueOf(suma);
+                return respuesta = resultado;
             }
             
             if(agregar.equals("-")){
                 double resta = Double.parseDouble(numero2) - Double.parseDouble(numero1);
-                resultado = String.valueOf(resta);
+                String resultado = String.valueOf(resta);
                 numero1 = String.valueOf(resta);
+                return respuesta = resultado;
             }
             
             if(agregar.equals("*")){
                 double multiplicacion = Double.parseDouble(numero1) * Double.parseDouble(numero2);
-                resultado = String.valueOf(multiplicacion);
+                String resultado = String.valueOf(multiplicacion);
                 numero1 = String.valueOf(multiplicacion);
+                return respuesta = resultado;
             }
             
             if(agregar.equals("/")){
                 double division = Double.parseDouble(numero2) / Double.parseDouble(numero1);
-                resultado = String.valueOf(division);
+                String resultado = String.valueOf(division);
                 numero1 = String.valueOf(division);
+                return respuesta = resultado;
             }
             
-            
         }
-        return "Resultado: " + resultado;
+        return respuesta;
     }
 }

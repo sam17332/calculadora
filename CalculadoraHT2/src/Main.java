@@ -24,9 +24,15 @@ public class Main {
         String linea;
         while((linea = buff.readLine()) != null){
           System.out.println(linea);
+          //System.out.println(main.calcular(linea));
           System.out.println("Se hace la operacion");
         }
-        //System.out.println(opera.read());
+        
+        String operacion ;
+        operacion = main.calcular("1 1 +");
+        
+        System.out.println(operacion);
+        
     }
     
 }
