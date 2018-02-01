@@ -10,6 +10,60 @@
  */
 public class Calculadora implements CalculadoraI {
     public String calcular(String esp){
-        return"";
+        String resultado = "";
+        StackVector<String> pila = new StackVector<String>();
+        
+        for(int i=0; i<=esp.length(); i++){
+            String agregar = esp.substring(0, esp.length());
+            
+            /* este if solo va a dejar que puedan agregarse a la pila los
+            numeros del 0 al 9 y los signos de suma, resta, multiplicacion y 
+            division
+            */
+            String numero1 = "";
+            String numero2 = "";
+            
+            /*
+            ||agregar.equals("+")||agregar.equals("-")
+                    ||agregar.equals("*")||agregar.equals("/")
+            */
+            if(agregar.equals("0")||agregar.equals("1")||agregar.equals("2")||
+               agregar.equals("3")||agregar.equals("4")||agregar.equals("5")
+               ||agregar.equals("6")||agregar.equals("7")||agregar.equals("8")
+               ||agregar.equals("9")){
+                
+                pila.push(agregar);
+                numero2 = numero1;
+                numero1 = agregar;
+                
+            }else{
+                System.out.println("Revisar documento, hay un dato que no es numero o un signo para operar");
+            }
+            
+            if(agregar.equals("+")){
+                double suma = Double.parseDouble(numero1) + Double.parseDouble(numero2);
+                numero1 = String.valueOf(suma);
+            }
+            
+            if(agregar.equals("-")){
+                double resta = Double.parseDouble(numero2) - Double.parseDouble(numero1);
+                numero1 = String.valueOf(resta);
+            }
+            
+            if(agregar.equals("*")){
+                double multiplicacion = Double.parseDouble(numero1) * Double.parseDouble(numero2);
+                numero1 = String.valueOf(multiplicacion);
+            }
+            
+            if(agregar.equals("/")){
+                double division = Double.parseDouble(numero2) / Double.parseDouble(numero1);
+                numero1 = String.valueOf(division);
+            }
+            
+            
+            
+            
+        }
+        return "Resultado: " + resultado;
     }
 }
