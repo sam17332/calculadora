@@ -36,31 +36,38 @@ public class Calculadora implements CalculadoraI {
                 numero2 = numero1;
                 numero1 = agregar;
                 
-            }else{
+            }
+            
+            /*
+            else{
                 System.out.println("Revisar documento, hay un dato que no es numero o un signo para operar");
             }
+
+            */
             
             if(agregar.equals("+")){
                 double suma = Double.parseDouble(numero1) + Double.parseDouble(numero2);
+                resultado = String.valueOf(suma);
                 numero1 = String.valueOf(suma);
             }
             
             if(agregar.equals("-")){
                 double resta = Double.parseDouble(numero2) - Double.parseDouble(numero1);
+                resultado = String.valueOf(resta);
                 numero1 = String.valueOf(resta);
             }
             
             if(agregar.equals("*")){
                 double multiplicacion = Double.parseDouble(numero1) * Double.parseDouble(numero2);
+                resultado = String.valueOf(multiplicacion);
                 numero1 = String.valueOf(multiplicacion);
             }
             
             if(agregar.equals("/")){
                 double division = Double.parseDouble(numero2) / Double.parseDouble(numero1);
+                resultado = String.valueOf(division);
                 numero1 = String.valueOf(division);
             }
-            
-            
             
             
         }
