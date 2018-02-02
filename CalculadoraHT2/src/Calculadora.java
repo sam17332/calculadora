@@ -6,9 +6,14 @@
 
 /**
  *
- * @author USUARIO
+ * @author Antonio Reyes, Hector Miguel Valle, Rodrigo Samayoa
  */
 public class Calculadora implements CalculadoraI {
+    /**
+     * metodo calcular. se utiliza para poder realizar operaciones escritas en postfix
+     * @param esp
+     * @return Valor de la operacion realizada
+     */
     public String calcular(String esp){
         String respuesta = "";
         StackVector<String> pila = new StackVector<String>();
@@ -26,10 +31,10 @@ public class Calculadora implements CalculadoraI {
         
         while (!pila.empty()) {
             if ("0123456789".contains(pila.peek())) {
-                // Si el peek() es un numero, entonces...
+                // Si el peek() es un numero
                 evaluador.push(Integer.parseInt(pila.pop()));
             } else {
-                // Si no es un numero, entonces...
+                // Si no es un numero
                 caracter = pila.pop();
                 switch (caracter.charAt(0)) {
                     case '+': {
@@ -64,13 +69,15 @@ public class Calculadora implements CalculadoraI {
                     }
                 }
             }
-            //System.out.println("Eval: " + evaluador.peek() + " size: " + evaluador.size());
-            //System.out.println("Pila: " + pila.peek() + " size: " + pila.size());
+           
         }
         
+        
         if (!error) {
+            //en caso de que error = false
             return String.valueOf( evaluador.pop() );
         } else {
+            //en caso de que error = true (hay una division con 0 como el denominador).
             return "Error";
         }
     }

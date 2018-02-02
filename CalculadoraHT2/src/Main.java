@@ -6,7 +6,7 @@
 
 /**
  *
- * @author Antonio
+ * @author Antonio Reyes, Hector Miguel Valle, Rodrigo Samayoa
  */
 import java.io.*;
 public class Main {
@@ -25,7 +25,6 @@ public class Main {
         while((linea = buff.readLine()) != null){
           System.out.println(linea);
           System.out.println("Respuesta: " + main.calcular(linea) + "\n");
-          //System.out.println("Se hace la operacion");
         }
 
         
