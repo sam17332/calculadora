@@ -16,8 +16,8 @@ public class Calculadora implements CalculadoraI {
      */
     public String calcular(String esp){
         String respuesta = "";
-        StackVector<String> pila = new StackVector<String>();
-        StackVector<Integer> evaluador = new StackVector<Integer>();
+        Stack<String> pila = new StackVector<String>();
+        Stack<Integer> evaluador = new StackVector<Integer>();
         Boolean error = false;
         
         String[] cadena = esp.split(" ");
