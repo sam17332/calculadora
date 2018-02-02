@@ -12,66 +12,66 @@ public class Calculadora implements CalculadoraI {
     public String calcular(String esp){
         String respuesta = "";
         StackVector<String> pila = new StackVector<String>();
+        StackVector<Integer> evaluador = new StackVector<Integer>();
+        Boolean error = false;
         
-        for(int i=0; i<=esp.length(); i++){
-            String agregar = esp.substring(0, esp.length());
-            
-            
-            String numero1 = "";
-            String numero2 = "";
-            
-            /* este if solo va a dejar que puedan agregarse a la pila los
-            numeros del 0 al 9 y los signos de suma, resta, multiplicacion y 
-            division
-            */
-
-            if(agregar.equals("0")||agregar.equals("1")||agregar.equals("2")||
-               agregar.equals("3")||agregar.equals("4")||agregar.equals("5")
-               ||agregar.equals("6")||agregar.equals("7")||agregar.equals("8")
-               ||agregar.equals("9")){
-                
-                pila.push(agregar);
-                numero2 = numero1;
-                numero1 = agregar;
-                
-            }
-            
-            /*
-            else{
-                System.out.println("Revisar documento, hay un dato que no es numero o un signo para operar");
-            }
-
-            */
-            
-            if(agregar.equals("+")){
-                double suma = Double.parseDouble(numero1) + Double.parseDouble(numero2);
-                String resultado = String.valueOf(suma);
-                numero1 = String.valueOf(suma);
-                return respuesta = resultado;
-            }
-            
-            if(agregar.equals("-")){
-                double resta = Double.parseDouble(numero2) - Double.parseDouble(numero1);
-                String resultado = String.valueOf(resta);
-                numero1 = String.valueOf(resta);
-                return respuesta = resultado;
-            }
-            
-            if(agregar.equals("*")){
-                double multiplicacion = Double.parseDouble(numero1) * Double.parseDouble(numero2);
-                String resultado = String.valueOf(multiplicacion);
-                numero1 = String.valueOf(multiplicacion);
-                return respuesta = resultado;
-            }
-            
-            if(agregar.equals("/")){
-                double division = Double.parseDouble(numero2) / Double.parseDouble(numero1);
-                String resultado = String.valueOf(division);
-                numero1 = String.valueOf(division);
-                return respuesta = resultado;
-            }
-            
+        String[] cadena = esp.split(" ");
+        String caracter;
+        
+        // Metemos al stack los elementos en orden inverso.
+        for(int i= cadena.length - 1; i >= 0; i--){
+            caracter = cadena[i];
+            pila.push(caracter);
         }
-        return respuesta;
+        
+        while (!pila.empty()) {
+            if ("0123456789".contains(pila.peek())) {
+                // Si el peek() es un numero, entonces...
+                evaluador.push(Integer.parseInt(pila.pop()));
+            } else {
+                // Si no es un numero, entonces...
+                caracter = pila.pop();
+                switch (caracter.charAt(0)) {
+                    case '+': {
+                        // Suma.
+                        evaluador.push((evaluador.pop() + evaluador.pop()));
+                        break;
+                    }
+                    case '-': {
+                        // Resta.
+                        evaluador.push((evaluador.pop() - evaluador.pop()));
+                        break;
+                    }
+                    case '*': {
+                        // Multiplicacion.
+                        evaluador.push((evaluador.pop() * evaluador.pop()));
+                        break;
+                    }
+                    case '/': {
+                        // Division.
+                        int numerador = evaluador.pop();
+                        int denominador = evaluador.pop();
+                        // Evaluamos si no hay un error.
+                        if (denominador != 0) {
+                            // No hay error.
+                            evaluador.push((numerador / denominador));
+                        } else {
+                            // Hay error, si el 0 esta en el denominador, no hay solucion
+                            error = true;
+                            evaluador.push(0);
+                        }
+                        break;
+                    }
+                }
+            }
+            //System.out.println("Eval: " + evaluador.peek() + " size: " + evaluador.size());
+            //System.out.println("Pila: " + pila.peek() + " size: " + pila.size());
+        }
+        
+        if (!error) {
+            return String.valueOf( evaluador.pop() );
+        } else {
+            return "Error";
+        }
     }
 }

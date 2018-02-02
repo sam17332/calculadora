@@ -24,14 +24,12 @@ public class Main {
         String linea;
         while((linea = buff.readLine()) != null){
           System.out.println(linea);
-          //System.out.println(main.calcular(linea));
-          System.out.println("Se hace la operacion");
+          System.out.println("Respuesta: " + main.calcular(linea) + "\n");
+          //System.out.println("Se hace la operacion");
         }
+
         
-        String operacion ;
-        operacion = main.calcular("1 1 +");
         
-        System.out.println(operacion);
         
     }
     
